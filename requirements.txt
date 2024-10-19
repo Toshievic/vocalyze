@@ -1,0 +1,9 @@
+# html
+requests
+beautifulsoup4
+lxml
+# db
+psycopg2
+# other
+python-dotenv
+pytz
