@@ -129,13 +129,14 @@ def main():
                 conn.commit()
 
             # 再生回数等のデータをvideo_statに追加
-            cur.execute(insert_into_stat(True, current_time, video_ids[i],
+            cur.execute(insert_into_stat(False, current_time, video_ids[i],
                                          video_elems[i].find("li", {"class": "count view"}).span.text.replace(",", ""),
                                          video_elems[i].find("li", {"class": "count comment"}).span.text.replace(",", ""),
                                          video_elems[i].find("li", {"class": "count like"}).span.text.replace(",", ""),
                                          video_elems[i].find("li", {"class": "count mylist"}).span.text.replace(",", ""),
                                          ))
             conn.commit()
+    conn.close()
     logger.info("All done.")
 
 

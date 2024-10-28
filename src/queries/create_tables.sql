@@ -1,4 +1,4 @@
-CREATE TABLE video_detail (
+CREATE TABLE IF NOT EXISTS video_detail (
     video_id varchar(11) CONSTRAINT pk_video_detail PRIMARY KEY,
     title varchar(100) NOT NULL,
     description varchar(2000) NOT NULL,
@@ -19,7 +19,7 @@ CREATE TABLE video_detail (
     author_icon_url varchar(100) NOT NULL
 );
 
-CREATE TABLE video_stat (
+CREATE TABLE IF NOT EXISTS video_stat (
     reg_dtm timestamp with time zone,
     video_id varchar(11),
     num_views integer NOT NULL,
@@ -30,7 +30,7 @@ CREATE TABLE video_stat (
     CONSTRAINT fk_video_detail FOREIGN KEY (video_id) REFERENCES video_detail(video_id)
 );
 
-CREATE TABLE video_stat_sandbox (
+CREATE TABLE IF NOT EXISTS video_stat_sandbox (
     reg_dtm timestamp with time zone,
     video_id varchar(11),
     num_views integer NOT NULL,
@@ -41,7 +41,7 @@ CREATE TABLE video_stat_sandbox (
     CONSTRAINT fk_video_detail FOREIGN KEY (video_id) REFERENCES video_detail(video_id)
 );
 
-CREATE TABLE video_tag (
+CREATE TABLE IF NOT EXISTS video_tag (
     video_id varchar(11),
     tag varchar(50) NOT NULL,
     CONSTRAINT fk_video_detail FOREIGN KEY (video_id) REFERENCES video_detail(video_id)

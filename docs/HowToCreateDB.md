@@ -20,7 +20,7 @@ vocalyze=# CREATE USER ユーザ名 WITH PASSWORD 'パスワード';
 
 3. 作成したユーザにDBを利用するための権限を付与
 ```
-GRANT CREATE ON SCHEMA public TO ユーザ名;
+vocalyze=# GRANT CREATE ON SCHEMA public TO ユーザ名;
 ```
 
 ## デバッグ
