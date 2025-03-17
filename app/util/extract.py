@@ -80,15 +80,15 @@ def get_period_stat(interval):
     return df
 
 
-def display_stat(axis, offset, year):
-    if year is None:
-        display_df = st.session_state.df.drop(columns=["reg_dtm","video_id"]).sort_values(by=axis, ascending=False).reset_index(drop=True)
-    else:
-        display_df = st.session_state.df.drop(columns=["reg_dtm","video_id"])
-        display_df = display_df[display_df["upload_dtm"].dt.year==year].sort_values(by=axis, ascending=False).reset_index(drop=True)
-    display_df["upload_dtm"] = display_df["upload_dtm"].dt.tz_convert('Asia/Tokyo').dt.tz_localize(None).dt.strftime('%Y/%m/%d %H:%M:%S')
+def display_stat(axis):
+    display_df = st.session_state.df.drop(columns=["reg_dtm","video_id"]).sort_values(by=axis, ascending=False).reset_index(drop=True)
     display_df.index = display_df.index + 1
-    st.dataframe(display_df.iloc[offset:offset+100],
+    if st.session_state.artist:
+        display_df = display_df[display_df["author_name"]==st.session_state.artist]
+    if st.session_state.year:
+        display_df = display_df[display_df["upload_dtm"].dt.year==st.session_state.year]
+    display_df["upload_dtm"] = display_df["upload_dtm"].dt.tz_convert('Asia/Tokyo').dt.tz_localize(None).dt.strftime('%Y/%m/%d %H:%M:%S')
+    st.dataframe(display_df.iloc[st.session_state.offset:st.session_state.offset+100],
                  column_config={
                      "watch_url": st.column_config.LinkColumn(
                         "動画URL",
