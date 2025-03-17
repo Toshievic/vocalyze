@@ -74,10 +74,9 @@ st.session_state.offset = st.number_input("OFFSET:", min_value=0, value=0, step=
 pg = st.navigation([st.Page(total_views), st.Page(total_comments),st.Page(total_likes), st.Page(total_mylists)])
 pg.run()
 
-# アプリを終了するためのボタン
-if st.button("アプリを終了する"):
-    # アプリ終了時に実行したい処理
-    st.session_state.my_variable = "アプリが終了しました！"
+# セッション情報をリセットするボタン
+if st.button("Refresh"):
+    st.session_state.my_variable = "Successfully refreshed!"
     st.write(st.session_state.my_variable)
     st.session_state.conn.close()
 
